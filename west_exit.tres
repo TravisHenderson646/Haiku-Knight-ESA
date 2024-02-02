@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Exit" load_steps=2 format=3 uid="uid://1v1sw7hl0kyd"]
+
+[ext_resource type="Script" path="res://exit.gd" id="1_i1owt"]
+
+[resource]
+script = ExtResource("1_i1owt")
+target_scene = ""
+spawnpoint = ""
