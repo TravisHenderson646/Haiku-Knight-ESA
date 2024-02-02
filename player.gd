@@ -14,6 +14,9 @@ func _physics_process(delta):
 	handle_movement(delta)
 	move_and_slide()
 
+func _process(delta):
+	pass # put animations in here
+
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
