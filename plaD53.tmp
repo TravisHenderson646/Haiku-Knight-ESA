@@ -60,26 +60,33 @@ size = Vector2(4, 5)
 [sub_resource type="Animation" id="Animation_ym100"]
 resource_name = "Attack"
 length = 0.8
-tracks/0/type = "method"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sword")
+tracks/0/path = NodePath("AnimationPlayer/Sword:process_mode")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"activate_sword"
-}, {
-"args": [],
-"method": &"deactivate_sword"
-}]
+"update": 1,
+"values": [0, 4]
 }
 
 [sub_resource type="Animation" id="Animation_rkncs"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sword:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kxat2"]
 _data = {
@@ -90,6 +97,8 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_w75ts")
+JUMP_IMPULSE = null
+GRAVITY = null
 ACCELERATION = 800.0
 FRICTION = 800.0
 MAX_SPEED = 64.0
@@ -109,15 +118,13 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Detector"]
 shape = SubResource("RectangleShape2D_su17r")
 
-[node name="Sword" parent="." instance=ExtResource("7_e14vq")]
-visible = false
-collision_layer = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sword"]
-process_mode = 3
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kxat2")
 }
+
+[node name="Sword" parent="AnimationPlayer" instance=ExtResource("7_e14vq")]
+process_mode = 0
+collision_layer = 4
 
 [connection signal="body_entered" from="Enemy Detector" to="." method="_on_enemy_detector_body_entered"]

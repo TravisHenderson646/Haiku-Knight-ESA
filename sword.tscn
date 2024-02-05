@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6fklse7q7yei"]
+
+[ext_resource type="Texture2D" uid="uid://dmcxjmdax8ibx" path="res://images/player/run/0.png" id="1_8wc4w"]
+[ext_resource type="Script" path="res://sword.gd" id="1_s2pa2"]
+
+[node name="Sword" type="Area2D"]
+process_mode = 4
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_s2pa2")
+
+[node name="PlayerImageTesting" type="Sprite2D" parent="."]
+texture = ExtResource("1_8wc4w")
+
+[node name="HurtboxShape" type="CollisionPolygon2D" parent="."]
+position = Vector2(-1, -2)
+polygon = PackedVector2Array(0.999998, -9, 17, -7, 27, -4, 32, 0, 27, 4, 18, 8, 1, 9)
+
+[node name="Polygon2D" type="Polygon2D" parent="HurtboxShape"]
+color = Color(0, 0.682353, 0.752941, 1)
