@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk4exawsq5du2"]
+
+[ext_resource type="Script" path="res://snail.gd" id="1_0cuss"]
+[ext_resource type="Texture2D" uid="uid://cockks1xjuld7" path="res://images/snail/snail.png" id="1_quuf3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3oqj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_quuf3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmy3i"]
+size = Vector2(15, 8)
+
+[node name="Snail" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_0cuss")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -12)
+sprite_frames = SubResource("SpriteFrames_x3oqj")
+offset = Vector2(-8, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gmy3i")
+
+[node name="SwordDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordDetector"]
+shape = SubResource("RectangleShape2D_gmy3i")
+
+[connection signal="area_entered" from="SwordDetector" to="." method="_on_sword_detector_area_entered"]
